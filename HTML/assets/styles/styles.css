@@ -1,0 +1,56 @@
+@import "Lato.css";
+
+body {
+    margin: 0px;
+    overflow: hidden;
+}
+
+section {
+
+    width: 100vw;
+    height: 100vh;
+}
+
+h1 {
+    color: white;
+    position: absolute;
+    top: 4%;
+    left: 4%;
+    font-family: "HelveticaNeue";
+    font-size: 41px;
+}
+
+h2 {
+    color: white;
+    position: absolute;
+    top: 11%;
+    left: 4%;
+    font-family: "Lato Hairline";
+}
+
+#forkme {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 135px;
+    height: auto;
+}
+
+#page-1 {
+    background-image: url('./../_pictures/1.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-y: -220px;
+
+    position: relative;
+}
+#page-2 {
+    background-image: url('./../_pictures/2.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+#page-3 {
+    background-image: url('./../_pictures/3.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}

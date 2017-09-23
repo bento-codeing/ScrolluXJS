@@ -1,0 +1,39 @@
+@font-face {
+  font-family: "Lato Black";
+  src: url("Lato/Lato-Black.ttf"); }
+
+@font-face {
+  font-family: "Lato Black-Italic";
+  src: url("Lato/Lato-BlackItalic.ttf"); }
+
+@font-face {
+  font-family: "Lato Bold";
+  src: url("Lato/Lato-Bold.ttf"); }
+
+@font-face {
+  font-family: "Lato Bold-Italic";
+  src: url("Lato/Lato-BoldItalic.ttf"); }
+
+@font-face {
+  font-family: "Lato Hairline";
+  src: url("Lato/Lato-Hairline.ttf"); }
+
+@font-face {
+  font-family: "Lato Hairline-Italic";
+  src: url("Lato/Lato-HairlineItalic.ttf"); }
+
+@font-face {
+  font-family: "Lato Italic";
+  src: url("Lato/Lato-Italic.ttf"); }
+
+@font-face {
+  font-family: "Lato Light";
+  src: url("Lato/Lato-Light.ttf"); }
+
+@font-face {
+  font-family: "Lato Light-Italic";
+  src: url("Lato/Lato-LightItalic.ttf"); }
+
+@font-face {
+  font-family: "Lato";
+  src: url("Lato/Lato-Regular.ttf"); }
