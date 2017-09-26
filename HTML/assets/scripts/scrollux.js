@@ -1,78 +1,116 @@
-var anchor = new Object();
-
-class Scroll {
+class Scrollux {
 
     constructor(){
-        this.$dom = null;
-        this.$anchor = null;
 
-        this.li = null;
-        this.pageId = null;
+        // DOM Elements
+        this.$body = $('body');
+        this.$section = $('section');
+        this.$divanchor = null;
 
-        this.anchor = null;
-        this.arrayAnchor = [];
+        this.navWidth = $(window).width();
+        this.navHeight = $(window).height();
+
+        this.$navigator = null;
+        this.keysPx = null;
+
+        this.currentPage = null;
+        this.scrollbar = null;
+
+        this.counter = 1;
+
+        // Arrays
+        this.anchors = [];
+
+
+        // Initialization
+        this.init();
     }
 
-    init(dom, li){
 
-        if (dom == 'default') {
-            this.$dom = $('body');
-        } else {
-            this.$dom = dom;
-        }
+    init(){
 
-        this.li = li;
-        
-        this.anchor = anchor;
-        this.hrefAnchor(anchor);
-        this.createList(li);
-        this.asideActivatedHoverPage();
-        this.asideClick(li);
-        this.scrollWheel();
-        this.scrollKey();
-        this.displayCSS();
-    }
+        var i = this.$section.length;
 
-    createList(li){
-
-        var list = "<aside id=\"aside-scroll\"><ul id=\"ul-scroll\">";
-
-        for ( var i = 0 ; i < li ; i++ ) {
-
-            list += "<li class=\"asideList\">" + this.arrayAnchor[i] + "</li>";
-        }
-
-        list += "</ul></aside>";
-
-        this.$dom.append(list);
-    }
-
-    hrefAnchor(anchor){
-
-        var li = 1;
-        
-        for (var prop in anchor){
+        if (i > 0) {
             
-            // console.log(`anchor.${prop} = ${anchor[prop]}`);
+            this.navigatorClient();
+            this.keysSettingsPx();
+            this.findSACA(i);
+            this.createAside(i);
+            this.displayCSS();
+            this.$divanchor = $('.divanchor');  
+            this.hoverList(1);          
+            this.fcurrentPage(i);
+            this.keymap(i);
+            this.scrollWinY(i);
+            this.anchorClick();
 
-            var a = "<a href=\""+ `${anchor[prop]}` +"\" class=\"anchor "+ li +"\">"
-                   +"<div id=\"div_for_page_"+ li +"\" class=\"divanchor\"></div>"
-                   +"</a>";
-
-            this.arrayAnchor.push(a);
-
-            li += 1;
+        } else {
+            console.log("You don't have any DOM section in your body !")
         }
     }
 
+
+    // # 1) Find sections, addClass and create anchor for each
+    findSACA(i){
+
+        // Search sections
+        var finder = $('body').find('section');
+
+        var a = 1;
+
+        if (i >= a) {
+            
+            for (var find of finder) {
+                
+                // Add class for each section
+                if (i >= a) {
+
+                    $(find).addClass('page-' + a);
+                    $(find).attr('id', 'page-' + a);
+                    
+                    // Create a anchor for each section
+                    var anchor = "<a href=\"#page-"+ a +"\">"
+                                +"<div id=\"divpage-"+ a +"\" class=\"divanchor \"></div>"
+                                + "</a>";
+
+                    this.anchors.push(anchor);
+
+                    a += 1; 
+                }  
+            }
+
+        } else {
+            console.log("You don't have any DOM section in your body !")
+        }
+    }
+
+
+    // # 2) Display responsive CSS
     displayCSS(){
+
+        var body = this.$body;
+        var section = this.$section;
         var aside = $('#aside-scroll');
         var ul = $('#ul-scroll');
-        var li = $('.asideList');
+        var li = $('.asidelist');
         var div = $('.divanchor');
 
         var asideHeight = aside.height();
         
+        body.css({
+
+            "margin" : "0px",
+            // "overflow" : "hidden"
+        });
+
+        section.css({
+
+            "width" : "100vw",
+            "height" : "100vh",
+            "position" : "relative"
+        });
+
         aside.css({
             "position" : "fixed",
             "top" : "calc(50% - ("+ asideHeight +"px / 2))",
@@ -113,104 +151,157 @@ class Scroll {
         });
     }
 
-    asideClick(li){
-        
-        var app = this;
-        var flag = false;
 
-        this.$anchor = $('.anchor');
+    // # 3) Create a list for DOM aside
+    createAside(i){
 
-        this.$anchor.on('click', function(){
+        var list = "<aside id=\"aside-scroll\"><ul id=\"ul-scroll\">";
 
-            var self = $(this);
-
-            for (var i = 1 ; i <= li ; i++) {
-
-                if (self.hasClass(i)) {
-
-                    app.pageId = i;
-                    app.asideActivatedHoverPage();
-                    
-                    app.$dom.animate({
-
-                        scrollTop: $('#page-' + i).offset().top
-
-                    }, 1000);
-                }
-            }
-        })
-    }
-
-    asideActivatedHoverPage(){
-        
-        if (this.pageId == null) {
-            this.pageId = 1;
+        for ( var a = 0 ; a < i ; a++ ) {
+            
+            list += "<li class=\"asidelist\">" + this.anchors[a] + "</li>";
         }
 
+        list += "</ul></aside>";
+
+        this.$body.append(list);
+    }
+
+
+    // # 4) Current Page Settings
+    fcurrentPage(i){
+
+        var i = i;
+        var h = this.navHeight;
         var app = this;
-        var i = this.pageId;
-        var section = $('#page-' + i);
-        var divanchor = $('.divanchor');
 
-        section.on('mouseenter', function(){
+        $(window).on('scroll' ,function(){
+            
+            app.$scrollbar = $(window).scrollTop();
+            
+            var scrollbar = app.$scrollbar;
 
-            if (divanchor.hasClass('actual-Session')) {
-
-                $('.actual-Session').css({
-                    "background-color" : "rgba(255, 255, 255, 0)"
-                });
+            for (var y = 0 ; y < i ; y++) {
                 
-                divanchor.removeClass('actual-Session');
+                var min = (h * (y + 1));
+                var max = (h * (y + 2));
+
+                if (scrollbar <= h) {
+                    
+                    app.currentPage = y + 1;
+                    break;
+                } 
+
+                if (scrollbar > min && scrollbar < max){
+                    
+                    app.currentPage = y + 2;
+                    break;
+                }
+            }
+        });
+    }
+    
+
+    // # 5) Keys Settings
+    keymap(i){
+
+        var i = i;
+        var app = this;
+        var flag = true; // bool for animation
+
+        $(document).keydown(function(e){
+
+            if (flag == false) {
+                return;
             }
 
-            $('#div_for_page_' + i).addClass('actual-Session');
+            if (e.keyCode != 40 || e.keyCode != 38) {
+                event.preventDefault();
+                flag = true;
+            }
 
-            $('.actual-Session').css({
-                "background-color" : "white"
-            });
+            flag = false;
+
+            // Down
+            if (e.keyCode == 40) {
+
+                if (app.counter != i) {
+                    app.counter += 1
+                }
+
+                var counter = app.counter;
+
+                if (counter < (i + 1)) {
+
+                    app.currentPage = app.counter;
+
+                    app.hoverList(counter);
+
+                    $('html, body').animate({
+                        scrollTop : $(".page-" + app.counter).offset().top
+                    }, 1000, function(){
+                                flag = true;
+                            });
+                }
+            } else if (e.keyCode == 38) {
+                
+                if (app.counter != 1) {
+                    app.counter -= 1
+                }
+                
+                var counter = app.counter;
+
+                if (counter > 0) {
+
+                    app.currentPage = app.counter;
+
+                    app.hoverList(counter);
+
+                    $('html, body').animate({
+                        scrollTop : $(".page-" + app.counter).offset().top
+                    }, 1000, function(){
+                                flag = true;
+                            });
+                }
+            }
         });
     }
 
 
-    scrollWheel(){
+    // # 6) Scroll event
+    scrollWinY(i){
 
+        var i = i;
         var app = this;
-        var flag = true;
-        var i = this.pageId;
+        var flag = true; // bool for animation
 
-        $(document).bind('DOMMouseScroll mousewheel', function(e){
-
-            if (app.pageId == null) {
-                app.pageId = 1;
-            }
+        $(document).bind('DOMMouseScroll mousewheel MozMousePixelScroll', function(e){
 
             if (flag == false) {
                 return;
             }
 
             //descente neg //montee pos
-            // console.log(event.wheelDeltaY);
-            var thEvent = event.wheelDeltaY;
-            var counter = parseInt(app.pageId); 
-            var li = parseInt(app.li);
-            var lessli = li - 1;
+            var wheelEvent = event.wheelDeltaY;
 
             flag = false;
 
-            if (thEvent < 0) {
-                // window.scrollTo(0, window.scrollY + 1440);
-                counter -= 1;
+            if (wheelEvent < 0) {
 
-                if (counter < li) {
+                if (app.counter != i) {
+                    app.counter += 1
+                }
 
-                    if (counter != lessli) {
-                        app.pageId += 1;
-                    }
-                    
-                    app.asideActivatedHoverPage();
+                var counter = app.counter;
+
+                if (counter < (i + 1)) {
+
+                    app.currentPage = app.counter;
+
+                    app.hoverList(counter);
 
                     $('html, body').animate({
-                        scrollTop : $("#page-" + app.pageId).offset().top
+                        scrollTop : $(".page-" + app.counter).offset().top
                     }, 1000, function(){
                                 flag = true;
                             });
@@ -218,88 +309,91 @@ class Scroll {
                 
 
             } else {
-                // window.scrollTo(0, window.scrollY - 1440);
-                counter -= 1;
 
-                if (counter > -1) {
+                if (app.counter != 1) {
+                    app.counter -= 1
+                }
+                
+                var counter = app.counter;
 
-                    if (counter != 0) {
-                        app.pageId -= 1;
-                    }
-                    
-                    app.asideActivatedHoverPage();
-                    
+                if (counter > 0) {
+
+                    app.currentPage = app.counter;
+
+                    app.hoverList(counter);
+
                     $('html, body').animate({
-                        scrollTop : $("#page-" + app.pageId).offset().top
+                        scrollTop : $(".page-" + app.counter).offset().top
                     }, 1000, function(){
-                        flag = true;
-                    });
+                                flag = true;
+                            });
                 }
             }
         });
     }
 
-    scrollKey(){
 
-        var app = this;
-        var flag = true;
-        var i = this.pageId;
+    // # 7) Navigator detection
+    navigatorClient(){
 
-        $(document).keydown(function(e){
+        if(navigator.userAgent.indexOf("Firefox") != -1 ) {
+            this.$navigator = "Firefox";
+        } else if((navigator.userAgent.indexOf("MSIE") != -1 ) || (!!document.documentMode == true )) {
+            this.$navigator = "IE"; 
+        } else {
+            this.$navigator = "Default";
+        }
+    }
 
-            if (app.pageId == null) {
-                app.pageId = 1;
-            }
 
-            if (flag == false) {
-                return;
-            }
+    // # 8) Keys px
+    keysSettingsPx(){
 
-            var counter = parseInt(app.pageId); 
-            var li = parseInt(app.li);
-            var lessli = li - 1;
+        if (this.$navigator == 'Default') {
 
-            flag = false;
+            this.keysPx = 40;
 
-            if (e.keyCode == 40) {
-
-                counter -= 1;
-
-                if (counter < li) {
-
-                    if (counter != lessli) {
-                        app.pageId += 1;
-                    }
-                    
-                    app.asideActivatedHoverPage();
-
-                    $('html, body').animate({
-                        scrollTop : $("#page-" + app.pageId).offset().top
-                    }, 1000, function(){
-                                flag = true;
-                            });
-                }
-            } 
+        } if (this.$navigator == 'Firefox') {
             
-            if (e.keyCode == 38) {
+            this.keysPx = 48;
+        }
+    }
 
-                counter -= 1;
 
-                if (counter > -1) {
+    // 9) Add color on eventlist on client page.
+    hoverList(ctp){
 
-                    if (counter != 0) {
-                        app.pageId -= 1;
-                    }
-                    
-                    app.asideActivatedHoverPage();
-                    
-                    $('html, body').animate({
-                        scrollTop : $("#page-" + app.pageId).offset().top
-                    }, 1000, function(){
-                        flag = true;
-                    });
-                }
-            }
+        var divanchor = this.$divanchor;
+
+        if (divanchor.hasClass('actual-Session')) {
+            
+            $('.actual-Session').css({
+                "background-color" : "rgba(255, 255, 255, 0)"
+            });
+            
+            divanchor.removeClass('actual-Session');
+        }
+
+        $('#divpage-' + ctp).addClass('actual-Session');
+
+        $('.actual-Session').css({
+            "background-color" : "white"
+        });
+    }
+
+
+    // # 10) Anchor on click
+    anchorClick(){
+    
+        var app = this;
+        var anchor = $('#ul-scroll').find('a');
+
+        anchor.on('click', function(){
+
+            var idom = $(this).children().attr('id');
+            var ctp = idom.replace("divpage-", "");
+
+            app.counter = parseInt(ctp);
         });
     }
 }
