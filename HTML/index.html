@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Document</title>
+        <title>ScrolluX JS</title>
         <script src="./assets/scripts/jquery-3.2.1.min.js"></script>
         <link rel="stylesheet" href="./assets/styles/styles.css">
     </head>
@@ -13,16 +13,71 @@
     <body>
 
         <section>
-            <img src="./assets/styles/forkmeongithub.png" 
-             alt=""
-             id="forkme">
+            <a href="https://github.com/ARKHN3B/ScrolluXJS"
+               target="_blank">
+                <img src="./assets/styles/forkmeongithub.png" 
+                     alt=""
+                     id="forkme">
+            </a>
+            
 
              <h1>ScrolluX.JS</h1>
 
              <h2>Create a website with a one page scroll</h2>
+
+             <a href="https://github.com/ARKHN3B/ScrolluXJS">
+                <div id="download">
+                    <p>Download on Github</p>
+                </div>
+             </a>
+             
+
+             <h4>Create by <b>Ben Lmsc</b>.</h4>
         </section>
-        <section></section>
-        <section></section>
+        <section>
+            <h3>Ready to use</h3>
+            <p>It's simple ! All you need is to add the script on your document HTML5.</p>
+            <div id="code">
+                <code>
+                        &ltscript src="scrollux.js"&gt&lt/script&gt
+                </code>
+                <code>
+                    var scroll = new Scrollux({});
+                </code>
+                <p id="options">options :</p>
+                <code>
+                    var scroll = new Scrollux({ <br>
+                        overflowY : "hidden", <br>
+                        overflowX : "hidden", <br>
+                        ringListColor : "#FFF", <br>
+                        ringListSize : "9px", <br>
+                        ringActualSessionColor : "#FFF", <br>
+                        ringHoverColor : "#FFF", <br>
+                        setTimeAnimation : 1000 <br>
+                    });
+                </code>
+            </div>
+        </section>
+        <section>
+            <div>
+                <h4>That's practice, don't you think ?</h4>
+                <p id="p">You can customize the animation, the buttons list, and all you need to do is to add the script 
+                          <a href="https://github.com/ARKHN3B/ScrolluXJS" style="text-decoration: none; color: #FFF"
+                             onmouseover="$(this).css('color', '#ff7f7f')"
+                             onmouseout="$(this).css('color', '#FFF')"
+                          >ScrolluX.JS</a>  
+                          and to call it !</p>
+                <p> <span style="font-family:'Lato Light' ">Important</span> : Remember, you need to install jQuery before uses it. 
+                   Please, if you like this plugin, don't forget to speech about this plugin around you ! <span style="color: coral">Enjoy coding !</span></p>
+            </div>
+            
+            <a href="https://github.com/ARKHN3B/ScrolluXJS" style="position: absolute; top: 45%; left: 6%; color: #fff;
+            font-family: 'Lato Hairline'; font-size: 26px; text-decoration: none;
+            
+            "><span style="margin-right: 8px">&#9758;</span> Download on <span onmouseover="$(this).css('color', '#ff7f7f')"
+                                onmouseout="$(this).css('color', '#FFF')"
+                                >Github</span></a>
+        </section>
         <!-- <footer style="width : 100%; height : 300px; background-color : red"></footer> -->
         <script src="./assets/scripts/scrollux.js"></script>
         <script>
