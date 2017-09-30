@@ -1,11 +1,15 @@
 # ScrolluXJS
 Plugin jQuery : Create a onepage scroll for your website :sunrise:
 
+<br/>
+
 
 *Preview :* 
 ![alt text](https://github.com/ARKHN3B/ScrolluXJS/blob/master/example.png "example")
 
 ***
+
+<br/>
 
 ### The procedure is simple :
 
@@ -46,8 +50,10 @@ var scroll = new Scrollux({
                 ringHoverColor : "#FFF",
                 setTimeAnimation : 1000 
             });
-```
+```    
+<br/>
 
 ***
+
 
 ###### If you like it, shares with your friends or with your collaborators ! :wink: :thumbsup:
