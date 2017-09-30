@@ -24,9 +24,17 @@
         <section></section>
         <section></section>
         <!-- <footer style="width : 100%; height : 300px; background-color : red"></footer> -->
-        <script src="./assets/scripts/Scrollux.js"></script>
+        <script src="./assets/scripts/scrollux.js"></script>
         <script>
-            var scroll = new Scrollux();
+            var scroll = new Scrollux({
+                overflowY : "hidden",
+                overflowX : "hidden",
+                ringListColor : "#FFF",
+                ringListSize : "9px", 
+                ringActualSessionColor : "#FFF",
+                ringHoverColor : "#FFF",
+                setTimeAnimation : 1000 
+            });
         </script>
     </body>
 </html>

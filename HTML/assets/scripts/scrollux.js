@@ -1,6 +1,6 @@
 class Scrollux {
 
-    constructor(){
+    constructor(custom){
 
         // DOM Elements
         this.$body = $('body');
@@ -18,8 +18,23 @@ class Scrollux {
 
         this.counter = 1;
 
+
         // Arrays
         this.anchors = [];
+
+
+        // Settings which the developper can customize
+        this.defaults = {
+            overflowY : "hidden",
+            overflowX : "hidden",
+            ringListColor : "#FFF",
+            ringListSize : "9px", 
+            ringActualSessionColor : "#FFF",
+            ringHoverColor : "#FFF",
+            setTimeAnimation : 1000 
+        };
+
+        this.settings = $.extend({}, this.defaults, custom);
 
 
         // Initialization
@@ -32,19 +47,21 @@ class Scrollux {
         var i = this.$section.length;
 
         if (i > 0) {
+
+            var settings = this.settings;
             
             this.navigatorClient();
             this.keysSettingsPx();
             this.findSACA(i);
             this.createAside(i);
-            this.displayCSS();
+            this.displayCSS(settings.overflowY, settings.overflowX, settings.ringListColor, settings.ringListSize);
             this.$divanchor = $('.divanchor');  
-            this.hoverList(1);          
+            this.hoverList(1, settings.ringActualSessionColor);          
             this.fcurrentPage(i);
-            this.keymap(i);
-            this.scrollWinY(i);
+            this.keymap(i, settings.setTimeAnimation);
+            this.scrollWinY(i, settings.setTimeAnimation);
             this.anchorClick();
-            this.mouseHover();
+            this.mouseHover(settings.ringHoverColor, settings.ringActualSessionColor);
 
         } else {
             console.log("You don't have any DOM section in your body !")
@@ -88,7 +105,7 @@ class Scrollux {
 
 
     // # 2) Display responsive CSS
-    displayCSS(){
+    displayCSS(overflowY, overflowX, ringListColor, ringListSize){
 
         var body = this.$body;
         var section = this.$section;
@@ -102,7 +119,8 @@ class Scrollux {
         body.css({
 
             "margin" : "0px",
-            "overflow" : "hidden"
+            "overflow-y" : overflowY,
+            "overflow-x" : overflowX
         });
 
         section.css({
@@ -132,9 +150,9 @@ class Scrollux {
         });
 
         div.css({
-            "width" : "9px",
-            "height" : "9px",
-            "border" : "2px solid white",
+            "width" : ringListSize,
+            "height" : ringListSize,
+            "border" : "2px solid " + ringListColor,
             "border-radius" : "50%",
             "cursor" : "pointer",
             "background-color" : "rgba(255, 255, 255, 0)"
@@ -193,7 +211,7 @@ class Scrollux {
     
 
     // # 5) Keys Settings
-    keymap(i){
+    keymap(i, setTimeAnimation){
 
         var i = i;
         var app = this;
@@ -229,7 +247,7 @@ class Scrollux {
 
                     $('html, body').animate({
                         scrollTop : $(".page-" + app.counter).offset().top
-                    }, 1000, function(){
+                    }, setTimeAnimation, function(){
                                 flag = true;
                             });
                 }
@@ -249,7 +267,7 @@ class Scrollux {
 
                     $('html, body').animate({
                         scrollTop : $(".page-" + app.counter).offset().top
-                    }, 1000, function(){
+                    }, setTimeAnimation, function(){
                                 flag = true;
                             });
                 }
@@ -259,7 +277,7 @@ class Scrollux {
 
 
     // # 6) Scroll event
-    scrollWinY(i){
+    scrollWinY(i, setTimeAnimation){
 
         var i = i;
         var app = this;
@@ -292,7 +310,7 @@ class Scrollux {
 
                     $('html, body').animate({
                         scrollTop : $(".page-" + app.counter).offset().top
-                    }, 1000, function(){
+                    }, setTimeAnimation, function(){
                                 flag = true;
                             });
                 }
@@ -314,7 +332,7 @@ class Scrollux {
 
                     $('html, body').animate({
                         scrollTop : $(".page-" + app.counter).offset().top
-                    }, 1000, function(){
+                    }, setTimeAnimation, function(){
                                 flag = true;
                             });
                 }
@@ -367,7 +385,7 @@ class Scrollux {
         $('#divpage-' + ctp).addClass('actual-Session');
 
         $('.actual-Session').css({
-            "background-color" : "white"
+            "background-color" : this.settings.ringActualSessionColor
         });
     }
 
@@ -411,7 +429,7 @@ class Scrollux {
 
 
     // # 11) Display Css for mouse hoverlist
-    mouseHover(){
+    mouseHover(ringHoverColor, ringActualSessionColor){
 
         var app = this;
         var div = $('.divanchor');
@@ -423,13 +441,16 @@ class Scrollux {
 
             self.css({
 
-                "background-color" : "#FFF"
+                "background-color" : ringHoverColor
             });
             
         }, function(){
 
             if (self.hasClass('actual-Session')) {
 
+                self.css({
+                    "background-color" : ringActualSessionColor
+                });
                 return;
 
             } else {
