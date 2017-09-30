@@ -5,6 +5,8 @@ Plugin jQuery : Create a onepage scroll for your website :sunrise:
 *Preview :* 
 ![alt text](https://github.com/ARKHN3B/ScrolluXJS/blob/master/example.png "example")
 
+***
+
 ### The procedure is simple :
 
 <dl>
@@ -45,3 +47,7 @@ var scroll = new Scrollux({
                 setTimeAnimation : 1000 
             });
 ```
+
+***
+
+###### If you like it, shares with your friends or with your collaborators ! :wink: :thumbsup:
