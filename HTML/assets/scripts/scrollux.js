@@ -44,6 +44,7 @@ class Scrollux {
             this.keymap(i);
             this.scrollWinY(i);
             this.anchorClick();
+            this.mouseHover();
 
         } else {
             console.log("You don't have any DOM section in your body !")
@@ -101,7 +102,7 @@ class Scrollux {
         body.css({
 
             "margin" : "0px",
-            // "overflow" : "hidden"
+            "overflow" : "hidden"
         });
 
         section.css({
@@ -135,19 +136,8 @@ class Scrollux {
             "height" : "9px",
             "border" : "2px solid white",
             "border-radius" : "50%",
-            "cursor" : "pointer"
-        });
-
-        div.mouseover(function(){
-            $(this).css({
-                "background-color" : "white"
-            });
-        });
-
-        div.mouseout(function(){
-            $(this).css({
-                "background-color" : "rgba(255, 255, 255, 0)"
-            });
+            "cursor" : "pointer",
+            "background-color" : "rgba(255, 255, 255, 0)"
         });
     }
 
@@ -394,6 +384,60 @@ class Scrollux {
             var ctp = idom.replace("divpage-", "");
 
             app.counter = parseInt(ctp);
+            app.currentPage = app.counter;
+
+            app.hoverList(app.counter);
+
+            console.log(app.hoverList(app.counter));
+
+            // var divanchor = app.$divanchor;
+
+            // if (divanchor.hasClass('actual-Session')) {
+                
+            //     $('.actual-Session').css({
+            //         "background-color" : "rgba(255, 255, 255, 0)"
+            //     });
+                
+            //     divanchor.removeClass('actual-Session');
+            // }
+    
+            // $('#divpage-' + app.counter).addClass('actual-Session');
+    
+            // $('.actual-Session').css({
+            //     "background-color" : "white"
+            // });
+        });
+    }
+
+
+    // # 11) Display Css for mouse hoverlist
+    mouseHover(){
+
+        var app = this;
+        var div = $('.divanchor');
+        var self = null;
+
+        div.hover(function(){
+
+            self = $(this);
+
+            self.css({
+
+                "background-color" : "#FFF"
+            });
+            
+        }, function(){
+
+            if (self.hasClass('actual-Session')) {
+
+                return;
+
+            } else {
+
+                self.css({
+                    "background-color" : "rgba(255, 255, 255, 0)"
+                });
+            }
         });
     }
 }
