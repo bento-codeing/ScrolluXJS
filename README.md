@@ -1,7 +1,9 @@
 # ScrolluXJS
-Plugin jQuery : Create a onepage scroll for your website
+Plugin jQuery : Create a onepage scroll for your website :sunrise:
 
-![alt text](https://www.noelshack.com/2017-39-6-1506802887-capture-d-ecran-2017-09-30-a-22-17-59.png "example")
+
+*Preview :* 
+![alt text](https://github.com/ARKHN3B/ScrolluXJS/blob/master/example.png "example")
 
 ### The procedure is simple :
 
