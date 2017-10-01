@@ -40,6 +40,8 @@ var scroll = new Scrollux({});
   <dd>4. You can set the style of the buttons list, managed the scrolling time of the animation or add a footer with that parameters :</dd>
 </dl>
 
+> ! Important : if you active the footer section, the last section on your DOM takes this role.
+
 ```javascript
 var scroll = new Scrollux({
                 overflowY : "hidden",  
@@ -67,6 +69,7 @@ var scroll = new Scrollux({
                 footerSize : "500px"      // You can set the height of your footer
             });
 ```    
+
 <br/>
 
 ***
