@@ -42,15 +42,29 @@ var scroll = new Scrollux({});
 
 ```javascript
 var scroll = new Scrollux({
-                overflowY : "hidden",
-                overflowX : "hidden",
-                ringListColor : "#FFF",
-                ringListSize : "9px", 
-                ringActualSessionColor : "#FFF",
-                ringHoverColor : "#FFF",
-                setTimeAnimation : 1000,
-                footer : false,
-                footerSize : "500px" 
+                overflowY : "hidden",  
+                overflowX : "hidden", 
+                ringListColor : "#FFF", 
+                ringListSize : "9px",     
+                ringActualSessionColor : "#FFF", 
+                ringHoverColor : "#FFF",  
+                setTimeAnimation : 1000,  
+                footer : false,           
+                footerSize : "500px"      
+            });
+```  
+
+```javascript
+var scroll = new Scrollux({
+                overflowY : "hidden",     // Hides the vertical scrollbar
+                overflowX : "hidden",     // Hides the horizontal scrollbar
+                ringListColor : "#FFF",   // Changes color of the outline of the buttons list
+                ringListSize : "9px",     // Changes size of the buttons list
+                ringActualSessionColor : "#FFF", // Changes color of the actual section button hover
+                ringHoverColor : "#FFF",  // Changes color of the button over
+                setTimeAnimation : 1000,  // Set the time of the scroll animation
+                footer : false,           // Set 'true' if you want to have a footer section
+                footerSize : "500px"      // You can set the height of your footer
             });
 ```    
 <br/>
