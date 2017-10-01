@@ -37,7 +37,7 @@ var scroll = new Scrollux({});
  
  <dl>
   <dt>Options :</dt>
-  <dd>4. You can set the style of the buttons list or the time scroll animation with that parameters :</dd>
+  <dd>4. You can set the style of the buttons list, managed the scrolling time of the animation or add a footer with that parameters :</dd>
 </dl>
 
 ```javascript
@@ -48,7 +48,9 @@ var scroll = new Scrollux({
                 ringListSize : "9px", 
                 ringActualSessionColor : "#FFF",
                 ringHoverColor : "#FFF",
-                setTimeAnimation : 1000 
+                setTimeAnimation : 1000,
+                footer : false,
+                footerSize : "500px" 
             });
 ```    
 <br/>
