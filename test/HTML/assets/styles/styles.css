@@ -1,0 +1,201 @@
+@import "Lato.css";
+
+body {
+    overflow-x: hidden;
+}
+
+.page-1 {
+    background-image: url('1.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-y: -110px;
+}
+
+.page-1 h1 {
+    color: white;
+    position: absolute;
+    top: 4%;
+    left: 4%;
+    font-family: "HelveticaNeue";
+    font-size: 41px;
+}
+
+.page-1 h2 {
+    color: white;
+    position: absolute;
+    top: 11%;
+    left: 4%;
+    font-family: "Lato Hairline";
+}
+
+.page-1 h4 {
+    font-family: "Lato Hairline";
+    color: white;
+    text-align: center;
+
+    position: absolute;
+    top: 93.5%;
+    left: 90.2%;
+}
+
+#forkme {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 135px;
+    height: auto;
+}
+
+#download {
+    position: absolute;
+    top: 87.4%;
+    left: 4%;
+
+    width: 200px;
+    height: 64px;
+
+    background-color: rgba(9, 0, 4, 0.37);
+    border: 2px solid rgb(218, 198, 158);
+    border-radius: 7px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+    cursor: pointer;
+}
+
+#download p {
+    font-family: "Lato";
+    color: rgb(233, 215, 178);
+    margin: 0px;
+    padding-bottom: 3px;
+}
+
+#download:hover {
+    background-color: rgba(9, 0, 4, 0.64);
+}
+
+.page-2 {
+    background-image: url('3.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.page-2 h3 {
+    font-family: "Lato Hairline";
+    font-size: 42px;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.page-2 p {
+    font-family: "Lato Hairline";
+    font-size: 26px;
+    color: white;
+
+    margin: 0px;
+}
+
+#code {
+    background-color: rgba(231, 183, 169, 0.42);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 3px;
+    width: 40.4%;
+    height: 27%;
+    position: relative;
+
+    margin-top: 40px;
+}
+
+#code code:first-child {
+    position: absolute;
+    width: 310px;
+    height: 38px;
+    top: 4%;
+    left: calc(50% - (310px / 2));
+    background-color: #e7b7aa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    border: 1px solid rgba(245, 245, 220, 0.81);
+}
+
+#code code:nth-child(2) {
+    position: absolute;
+    width: 310px;
+    height: 68px;
+    top: 32%;
+    left: calc(23% - (310px / 2));
+    background-color: #e7b7aa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    border: 1px solid rgba(245, 245, 220, 0.81);
+}
+
+#code code:last-child {
+    position: absolute;
+    width: 310px;
+    height: 159px;
+    top: 32%;
+    right: calc(23% - (310px / 2));
+    background-color: #fed2bc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    border: 1px solid rgba(245, 245, 220, 0.81);
+}
+
+#options {
+    font-size: 20px;
+    position: absolute;
+    top: 40%;
+    left: 45.3%;
+}
+
+.page-3 {
+    background-image: url('2.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.page-3 div {
+    position: absolute;
+    top: 11%;
+    left: 6%;
+    width: 37%;
+    height: auto;
+}
+
+.page-3 h4 {
+    font-family: "Lato Light";
+    font-size: 29px;
+    color: white;
+}
+
+.page-3 p {
+    font-family: "Lato Hairline";
+    font-size: 26px;
+    color: white;
+
+    margin: 0px;
+
+    line-height: 1.3;
+}
+
+.page-3 #p {
+    margin-bottom: 6px;
+}
+
+
+

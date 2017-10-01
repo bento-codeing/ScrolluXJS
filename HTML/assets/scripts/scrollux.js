@@ -31,7 +31,9 @@ class Scrollux {
             ringListSize : "9px", 
             ringActualSessionColor : "#FFF",
             ringHoverColor : "#FFF",
-            setTimeAnimation : 1000 
+            setTimeAnimation : 1000,
+            footer : false,
+            footerSize : "500px" 
         };
 
         this.settings = $.extend({}, this.defaults, custom);
@@ -52,9 +54,9 @@ class Scrollux {
             
             this.navigatorClient();
             this.keysSettingsPx();
-            this.findSACA(i);
+            this.findSACA(i, settings.footer);
             this.createAside(i);
-            this.displayCSS(settings.overflowY, settings.overflowX, settings.ringListColor, settings.ringListSize);
+            this.displayCSS(settings.overflowY, settings.overflowX, settings.ringListColor, settings.ringListSize, settings.footerSize);
             this.$divanchor = $('.divanchor');  
             this.hoverList(1, settings.ringActualSessionColor);          
             this.fcurrentPage(i);
@@ -70,7 +72,7 @@ class Scrollux {
 
 
     // # 1) Find sections, addClass and create anchor for each
-    findSACA(i){
+    findSACA(i, footer){
 
         // Search sections
         var finder = $('body').find('section');
@@ -97,6 +99,10 @@ class Scrollux {
                     a += 1; 
                 }  
             }
+            
+            if (footer == true) {
+                finder.last().addClass('footer');
+            }
 
         } else {
             console.log("You don't have any DOM section in your body !")
@@ -105,7 +111,7 @@ class Scrollux {
 
 
     // # 2) Display responsive CSS
-    displayCSS(overflowY, overflowX, ringListColor, ringListSize){
+    displayCSS(overflowY, overflowX, ringListColor, ringListSize, footerSize){
 
         var body = this.$body;
         var section = this.$section;
@@ -128,6 +134,10 @@ class Scrollux {
             "width" : "100vw",
             "height" : "100vh",
             "position" : "relative"
+        });
+
+        $('.footer').css({
+            "height" : footerSize
         });
 
         aside.css({
