@@ -3,24 +3,24 @@ class Scrollux {
     constructor(custom){
 
         // DOM Elements
-        this.$body = $('body');
-        this.$section = $('section');
-        this.$divanchor = null;
+        this.$body = $('body')
+        this.$section = $('section')
+        this.$divanchor = null
 
-        this.navWidth = $(window).width();
-        this.navHeight = $(window).height();
+        this.navWidth = $(window).width()
+        this.navHeight = $(window).height()
 
-        this.$navigator = null;
-        this.keysPx = null;
+        this.$navigator = null
+        this.keysPx = null
 
-        this.currentPage = null;
-        this.scrollbar = null;
+        this.currentPage = null
+        this.scrollbar = null
 
-        this.counter = 1;
+        this.counter = 1
 
 
         // Arrays
-        this.anchors = [];
+        this.anchors = []
 
 
         // Settings which the developper can customize
@@ -34,36 +34,36 @@ class Scrollux {
             setTimeAnimation : 1000,
             footer : false,
             footerSize : "500px" 
-        };
+        }
 
-        this.settings = $.extend({}, this.defaults, custom);
+        this.settings = $.extend({}, this.defaults, custom)
 
 
         // Initialization
-        this.init();
+        this.init()
     }
 
 
     init(){
 
-        var i = this.$section.length;
+        let i = this.$section.length
 
         if (i > 0) {
 
-            var settings = this.settings;
+            var settings = this.settings
             
-            this.navigatorClient();
-            this.keysSettingsPx();
-            this.findSACA(i, settings.footer);
-            this.createAside(i);
-            this.displayCSS(settings.overflowY, settings.overflowX, settings.ringListColor, settings.ringListSize, settings.footerSize);
-            this.$divanchor = $('.divanchor');  
-            this.hoverList(1, settings.ringActualSessionColor);          
-            this.fcurrentPage(i);
-            this.keymap(i, settings.setTimeAnimation);
-            this.scrollWinY(i, settings.setTimeAnimation);
-            this.anchorClick();
-            this.mouseHover(settings.ringHoverColor, settings.ringActualSessionColor);
+            this.navigatorClient()
+            this.keysSettingsPx()
+            this.findSACA(i, settings.footer)
+            this.createAside(i)
+            this.displayCSS(settings.overflowY, settings.overflowX, settings.ringListColor, settings.ringListSize, settings.footerSize)
+            this.$divanchor = $('.divanchor')
+            this.hoverList(1, settings.ringActualSessionColor)        
+            this.fcurrentPage(i)
+            this.keymap(i, settings.setTimeAnimation)
+            this.scrollWinY(i, settings.setTimeAnimation)
+            this.anchorClick()
+            this.mouseHover(settings.ringHoverColor, settings.ringActualSessionColor)
 
         } else {
             console.log("You don't have any DOM section in your body !")
@@ -75,9 +75,9 @@ class Scrollux {
     findSACA(i, footer){
 
         // Search sections
-        var finder = $('body').find('section');
+        var finder = $('body').find('section')
 
-        var a = 1;
+        var a = 1
 
         if (i >= a) {
             
@@ -86,23 +86,21 @@ class Scrollux {
                 // Add class for each section
                 if (i >= a) {
 
-                    $(find).addClass('page-' + a);
-                    $(find).attr('id', 'page-' + a);
+                    $(find).addClass('page-' + a)
+                    $(find).attr('id', 'page-' + a)
                     
                     // Create a anchor for each section
                     var anchor = "<a href=\"#page-"+ a +"\">"
                                 +"<div id=\"divpage-"+ a +"\" class=\"divanchor \"></div>"
                                 + "</a>";
 
-                    this.anchors.push(anchor);
+                    this.anchors.push(anchor)
 
-                    a += 1; 
+                    a += 1
                 }  
             }
             
-            if (footer == true) {
-                finder.last().addClass('footer');
-            }
+            if (footer == true) finder.last().addClass('footer')
 
         } else {
             console.log("You don't have any DOM section in your body !")
@@ -113,32 +111,32 @@ class Scrollux {
     // # 2) Display responsive CSS
     displayCSS(overflowY, overflowX, ringListColor, ringListSize, footerSize){
 
-        var body = this.$body;
-        var section = this.$section;
-        var aside = $('#aside-scroll');
-        var ul = $('#ul-scroll');
-        var li = $('.asidelist');
-        var div = $('.divanchor');
+        const body = this.$body
+        const section = this.$section
+        const aside = $('#aside-scroll')
+        const ul = $('#ul-scroll')
+        const li = $('.asidelist')
+        const div = $('.divanchor')
 
-        var asideHeight = aside.height();
+        const asideHeight = aside.height()
         
         body.css({
 
             "margin" : "0px",
             "overflow-y" : overflowY,
             "overflow-x" : overflowX
-        });
+        })
 
         section.css({
 
             "width" : "100vw",
             "height" : "100vh",
             "position" : "relative"
-        });
+        })
 
         $('.footer').css({
             "height" : footerSize
-        });
+        })
 
         aside.css({
             "position" : "fixed",
@@ -147,17 +145,17 @@ class Scrollux {
             "width" : "auto",
             "height" : "auto",
             "z-index" : "9999"
-        });
+        })
 
         ul.css({
             "list-style-type" : "none",
             "display" : "flex",
             "flex-direction" : "column"
-        });
+        })
 
         li.css({
             "margin-bottom" : "20px"
-        });
+        })
 
         div.css({
             "width" : ringListSize,
@@ -166,54 +164,54 @@ class Scrollux {
             "border-radius" : "50%",
             "cursor" : "pointer",
             "background-color" : "rgba(255, 255, 255, 0)"
-        });
+        })
     }
 
 
     // # 3) Create a list for DOM aside
     createAside(i){
 
-        var list = "<aside id=\"aside-scroll\"><ul id=\"ul-scroll\">";
+        let list = "<aside id=\"aside-scroll\"><ul id=\"ul-scroll\">"
 
-        for ( var a = 0 ; a < i ; a++ ) {
+        for ( let a = 0 ; a < i ; a++ ) {
             
-            list += "<li class=\"asidelist\">" + this.anchors[a] + "</li>";
+            list += "<li class=\"asidelist\">" + this.anchors[a] + "</li>"
         }
 
-        list += "</ul></aside>";
+        list += "</ul></aside>"
 
-        this.$body.append(list);
+        this.$body.append(list)
     }
 
 
     // # 4) Current Page Settings
     fcurrentPage(i){
 
-        var i = i;
-        var h = this.navHeight;
-        var app = this;
+        var i = i
+        var h = this.navHeight
+        var app = this
 
-        $(window).on('scroll' ,function(){
+        $(window).on('scroll', () => {
             
-            app.$scrollbar = $(window).scrollTop();
+            app.$scrollbar = $(window).scrollTop()
             
-            var scrollbar = app.$scrollbar;
+            let scrollbar = app.$scrollbar
 
-            for (var y = 0 ; y < i ; y++) {
+            for (let y = 0 ; y < i ; y++) {
                 
-                var min = (h * (y + 1));
-                var max = (h * (y + 2));
+                let min = (h * (y + 1))
+                let max = (h * (y + 2))
 
                 if (scrollbar <= h) {
                     
-                    app.currentPage = y + 1;
-                    break;
+                    app.currentPage = y + 1
+                    break
                 } 
 
                 if (scrollbar > min && scrollbar < max){
                     
-                    app.currentPage = y + 2;
-                    break;
+                    app.currentPage = y + 2
+                    break
                 }
             }
         });
@@ -223,62 +221,56 @@ class Scrollux {
     // # 5) Keys Settings
     keymap(i, setTimeAnimation){
 
-        var i = i;
-        var app = this;
-        var flag = true; // bool for animation
+        var i = i
+        var app = this
+        var flag = true // bool for animation
 
-        $(document).keydown(function(e){
+        $(document).keydown((e) => {
 
-            if (flag == false) {
-                return;
-            }
+            if (flag == false) return
 
             if (e.keyCode != 40 || e.keyCode != 38) {
-                event.preventDefault();
-                flag = true;
+                event.preventDefault()
+                flag = true
             }
 
-            flag = false;
+            flag = false
 
             // Down
             if (e.keyCode == 40) {
 
-                if (app.counter != i) {
-                    app.counter += 1
-                }
+                if (app.counter != i) app.counter += 1
 
-                var counter = app.counter;
+                var counter = app.counter
 
                 if (counter < (i + 1)) {
 
-                    app.currentPage = app.counter;
+                    app.currentPage = app.counter
 
-                    app.hoverList(counter);
+                    app.hoverList(counter)
 
                     $('html, body').animate({
                         scrollTop : $(".page-" + app.counter).offset().top
-                    }, setTimeAnimation, function(){
-                                flag = true;
+                    }, setTimeAnimation, () => {
+                                flag = true
                             });
                 }
             } else if (e.keyCode == 38) {
                 
-                if (app.counter != 1) {
-                    app.counter -= 1
-                }
+                if (app.counter != 1) app.counter -= 1
                 
-                var counter = app.counter;
+                var counter = app.counter
 
                 if (counter > 0) {
 
-                    app.currentPage = app.counter;
+                    app.currentPage = app.counter
 
-                    app.hoverList(counter);
+                    app.hoverList(counter)
 
                     $('html, body').animate({
                         scrollTop : $(".page-" + app.counter).offset().top
-                    }, setTimeAnimation, function(){
-                                flag = true;
+                    }, setTimeAnimation, () => {
+                                flag = true
                             });
                 }
             }
@@ -289,15 +281,13 @@ class Scrollux {
     // # 6) Scroll event
     scrollWinY(i, setTimeAnimation){
 
-        var i = i;
-        var app = this;
-        var flag = true; // bool for animation
+        var i = i
+        var app = this
+        var flag = true // bool for animation
 
-        $(document).bind('DOMMouseScroll mousewheel MozMousePixelScroll', function(e){
+        $(document).bind('DOMMouseScroll mousewheel MozMousePixelScroll', (e) => {
 
-            if (flag == false) {
-                return;
-            }
+            if (flag == false) return
 
             //descente neg //montee pos
             var wheelEvent = event.wheelDeltaY;
@@ -306,44 +296,38 @@ class Scrollux {
 
             if (wheelEvent < 0) {
 
-                if (app.counter != i) {
-                    app.counter += 1
-                }
+                if (app.counter != i) app.counter += 1
 
-                var counter = app.counter;
+                var counter = app.counter
 
                 if (counter < (i + 1)) {
 
-                    app.currentPage = app.counter;
+                    app.currentPage = app.counter
 
-                    app.hoverList(counter);
+                    app.hoverList(counter)
 
                     $('html, body').animate({
                         scrollTop : $(".page-" + app.counter).offset().top
-                    }, setTimeAnimation, function(){
-                                flag = true;
+                    }, setTimeAnimation, () => {
+                                flag = true
                             });
                 }
-                
-
             } else {
 
-                if (app.counter != 1) {
-                    app.counter -= 1
-                }
+                if (app.counter != 1) app.counter -= 1
                 
-                var counter = app.counter;
+                var counter = app.counter
 
                 if (counter > 0) {
 
-                    app.currentPage = app.counter;
+                    app.currentPage = app.counter
 
-                    app.hoverList(counter);
+                    app.hoverList(counter)
 
                     $('html, body').animate({
                         scrollTop : $(".page-" + app.counter).offset().top
-                    }, setTimeAnimation, function(){
-                                flag = true;
+                    }, setTimeAnimation, () => {
+                                flag = true
                             });
                 }
             }
@@ -354,27 +338,20 @@ class Scrollux {
     // # 7) Navigator detection
     navigatorClient(){
 
-        if(navigator.userAgent.indexOf("Firefox") != -1 ) {
-            this.$navigator = "Firefox";
-        } else if((navigator.userAgent.indexOf("MSIE") != -1 ) || (!!document.documentMode == true )) {
-            this.$navigator = "IE"; 
-        } else {
-            this.$navigator = "Default";
-        }
+        if (navigator.userAgent.indexOf("Firefox") != -1 ) this.$navigator = "Firefox"
+        
+        else if((navigator.userAgent.indexOf("MSIE") != -1 ) || (!!document.documentMode == true )) this.$navigator = "IE"; 
+        
+        else this.$navigator = "Default";
     }
 
 
     // # 8) Keys px
     keysSettingsPx(){
 
-        if (this.$navigator == 'Default') {
+        if (this.$navigator == 'Default') this.keysPx = 40;
 
-            this.keysPx = 40;
-
-        } if (this.$navigator == 'Firefox') {
-            
-            this.keysPx = 48;
-        }
+        if (this.$navigator == 'Firefox') this.keysPx = 48;
     }
 
 
@@ -408,32 +385,13 @@ class Scrollux {
 
         anchor.on('click', function(){
 
-            var idom = $(this).children().attr('id');
-            var ctp = idom.replace("divpage-", "");
+            let idom = $(this).children().attr('id');
+            let ctp = idom.replace("divpage-", "");
 
             app.counter = parseInt(ctp);
             app.currentPage = app.counter;
 
             app.hoverList(app.counter);
-
-            console.log(app.hoverList(app.counter));
-
-            // var divanchor = app.$divanchor;
-
-            // if (divanchor.hasClass('actual-Session')) {
-                
-            //     $('.actual-Session').css({
-            //         "background-color" : "rgba(255, 255, 255, 0)"
-            //     });
-                
-            //     divanchor.removeClass('actual-Session');
-            // }
-    
-            // $('#divpage-' + app.counter).addClass('actual-Session');
-    
-            // $('.actual-Session').css({
-            //     "background-color" : "white"
-            // });
         });
     }
 
