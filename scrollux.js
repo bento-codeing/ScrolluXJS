@@ -25,7 +25,7 @@ class Scrollux {
 
         // Settings which the developper can customize
         this.defaults = {
-            overflowY : "hidden",
+            overflowY : "hidden", 
             overflowX : "hidden",
             ringListColor : "#FFF",
             ringListSize : "9px", 
